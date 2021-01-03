@@ -1,0 +1,117 @@
+body {
+    background: #003366;
+    color: white;
+}
+#wrapper {
+    width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.rectangle {
+    border-right: black 5px solid;
+    border-bottom: black 5px solid;
+    text-align: center;
+    float: left;
+    padding: 3px;
+    color: white;
+    /*background: #3875d7;*/
+    min-width: 150px;
+    min-height: 40px;
+}
+
+.legend {
+    width: 50%;
+    float: left;
+}
+
+#label {
+    width: 600px;
+    float: left;
+    padding: 20px;
+    color: #edecd6;
+    margin-top: 30px;
+}
+
+#logo {
+    width: 600px;
+    float: left;
+    padding: 20px;
+}
+
+img {
+    width: 80%;
+    height: auto;
+    border: coral 5px solid;
+}
+
+p {
+    margin-top: 40px;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+h2 {
+   text-align: center;
+}
+
+#instructor-login {
+    position: fixed;
+    right: 0;
+    padding: 10px;
+    background: darkolivegreen;
+    color: white;
+    font-size: 18px;
+    border-bottom-left-radius: 10px;
+}
+
+.legend-tile {
+    width: 20px;
+    height: 20px;
+    float: left;
+    border: 2px black solid;
+    margin: 2px;
+    margin-right: 5px;
+}
+
+.red {
+    background: red;
+}
+
+.light-red {
+    background: orangered;
+}
+
+.yellow {
+    background: #ff8c00;
+}
+
+.light-green {
+    background: limegreen;
+}
+
+.green {
+    background: green;
+}
+
+.desc-border {
+    border: 5px solid #5cb85c;
+}
+
+a:link {
+	color: white;
+}
+
+a:visited {
+	color: white;
+}
+
+a:hover {
+	text-decoration: none;
+	color: white;
+}
+
+footer {
+    text-align: center;
+    margin: 6px;
+}

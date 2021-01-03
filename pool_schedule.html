@@ -1,0 +1,119 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<title>Grafik Basenu Sportowego XYZ</title>
+	<meta name="description" content="Grafik dostępności torów basenu XYZ">
+	<meta name="keywords" content="grafik, basen, dostępność, tory, XYZ">
+	<meta name="author" content="Oskar Trybus">
+	<meta http-equiv="X-Ua-Compatible" content="IE=edge">
+
+    <script src="https://kit.fontawesome.com/b6bf2e6571.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&amp;subset=latin-ext" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'main.css' %}?{% now "U" %}">
+
+</head>
+<body>
+
+    <a href="{% url 'instructor-board' %}">
+        <div id="instructor-login">
+            PANEL INSTRUKTORA
+        </div>
+    </a>
+
+    <div id="wrapper">
+
+        <div id="label">
+
+            <h2> <i class="fas fa-swimmer"></i> BASEN XYZ <i class="fas fa-swimmer"></i></h2>
+            <p>Witamy na naszej stronie. Poniżej możecie Państwo sprawdzić dostępność (ilość zajętych torów na zajęcia grupowe oraz ilość uczestników lekcji indywidualnych) na basenie sportowym
+                w naszym obiekcie.</p>
+
+            <div class="legend">
+                <div style="font-size: 18px;"> LEGENDA: </div>
+                <div class="legend-tile red"></div> Bardzo duże obłożenie </br>
+                <div class="legend-tile light-red"></div> Duże obłożenie </br>
+                <div class="legend-tile yellow"></div> Średnie obłożenie </br>
+                <div class="legend-tile light-green"></div> Małe obłożenie </br>
+                <div class="legend-tile green"></div> Bardzo małe obłożenie
+            </div>
+
+            <p>
+                <a class="btn btn-success my-3" data-toggle="collapse" href="#howToReadSchedule" aria-expanded="false" aria-controls="collapseExample">
+                    <i class="fas fa-question-circle"></i> Jak czytać grafik?
+                </a>
+                <a class="btn btn-success my-3" data-toggle="collapse" href="#howWeCalculate" aria-expanded="false" aria-controls="collapseExample">
+                    <i class="fas fa-question-circle"></i> Jak obliczamy obłożenie?
+                </a>
+            </p>
+
+        </div>
+
+        <div id="logo">
+            <img src="{% static 'swimmer.jpg' %}" alt=""/>
+        </div>
+
+        <div style="clear: both;"></div>
+
+        <div class="collapse" id="howToReadSchedule">
+            <div class="card card-block mb-3 p-3 bg-transparent desc-border">
+                Na naszym basenie mamy 6 torów. Pierwsza liczba w danym polu odpowiada ilości
+                zarezerwowanych torów, na których klienci indywidualni nie mogą pływać,
+                natomiast druga liczba mówi o tym, ile na daną godzinę jest zapisanych osób na
+                lekcje indywidulne, które odbywają się na torach niezarezerwowanych. <span style="font-size: 20px; margin-bottom: 20px; margin-top: 20px;">
+                Przykład. </span> Pole oznaczone liczbami 2,5 oznacza, iż w danej godzinie dwa tory z sześciu
+                dostępnych są zarezerwowane, a na pozostałych (najczęściej skrajnych) są prowadzone lekcje
+                prywatne, na których zapisane jest 5 osób.
+            </div>
+        </div>
+
+        <div class="collapse" id="howWeCalculate">
+            <div class="card card-block mb-3 p-3 bg-transparent desc-border">
+                Przemnażając ilość zarezerwowanych torów oraz liczbę osób zapisanych na lekcje
+                prywatne przez odpowiednie wagi obliczamy współczynnik, na podstawie którego w grafiku
+                dobierane są kolory pól zgodnie z legedną.
+            </div>
+        </div>
+
+        <div class="rectangle" style="border-top: 0; border-left: 0;">
+        </div>
+
+        {% for day in daysOfTheWeek %}
+            <div class="rectangle", style="border-top: 5px solid black; background-color: #333">
+                {{ day }}
+            </div>
+        {% endfor %}
+
+        <div style="clear: both;"></div>
+
+        {% for term in terms %}
+            <div class="rectangle", style="border-left: 5px solid black; background-color: #333">
+                {% with term|first as first %}{{ first.hour }}{% endwith %}
+            </div>
+
+            {% for item in term %}
+                <div class="rectangle {{ item.fieldColor }}">
+                    {{ item.numberOfReservedTracks }}, {{ item.numberOfClients }}
+                </div>
+            {% endfor %}
+
+            <div style="clear: both;"></div>
+        {% endfor %}
+
+        <footer>
+
+            &copy; Project by: Oskar Trybus <a href="https://www.linkedin.com/in/oskar-trybus-09a7631a9/?originalSubdomain=pl"><i class="fab fa-linkedin"></i></a> <a href="http://www.oskartrybus.pl"><i class="fas fa-external-link-alt"></i></a>
+
+        </footer>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>
